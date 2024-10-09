@@ -1,0 +1,7 @@
+qureg.c+quantum_new_qureg+139+Instrumented
+qureg.c+quantum_new_qureg+140+UnInstrumented
+gates.c+quantum_hadamard+662+Instrumented
+gates.c+quantum_hadamard+663+Instrumented
+./qureg.h+quantum_add_hash+130+Instrumented
+./qureg.h+quantum_get_state+104+Instrumented
+measure.c+quantum_measure+82+Instrumented
