@@ -1,0 +1,549 @@
+# This is a sample config file. It was tested with:
+#
+#      Compiler name/version:       [gcc, 4.2 snapshot 20060325]
+#      Compiler name/version:       [gcc, 4.2 snapshot 20060617]
+#      Operating system version:    [SLES9 SP3 for AMD64]
+#      Operating system version:    [SUSE 10.1 for AMD64]
+#      Hardware:                    [Opteron]
+#
+# If your platform uses different versions, different
+# hardware or operates in a different mode (for
+# example, 32- vs. 64-bit mode), there is the possibiliy
+# that this configuration file may not work as-is.
+#
+# Note that issues with compilation should be directed
+# to the compiler vendor. Information about SPEC techncial
+# support can be found in the techsupport document in the
+# Docs directory of your benchmark installation.
+#
+# Also note that this is a sample configuration. It
+# is expected to work for the environment in which
+# it was tested; it is not guaranteed that this is
+# the config file that will provide the best performance.
+#
+# Note that you might find a more recent config file for
+# your platform with the posted results at
+# www.spec.org/cpu2006
+####################################################################
+# linux64-amd64-gcc42.cfg
+# FSF's gcc 4.2 config file for
+# AMD64 64-bit (64 bit binaries on 64 bit host)
+# Config file for CPU2006	int and fp Base only
+#####################################################################
+
+ignore_errors = yes
+tune          = base
+ext           = x86_64_linux
+output_format = asc, pdf, Screen
+reportable    = 0
+teeout        = yes
+teerunout     = yes
+hw_avail = Dec-9999
+license_num = 9999
+test_sponsor = Turbo Computers
+prepared_by = 
+tester      =
+test_date = Dec-9999
+strict_rundir_verify = 0
+
+default=default=default=default:
+#####################################################################
+#
+# Compiler selection
+#
+#####################################################################
+CC           = gcc
+CXX          = g++
+FC           = gfortran
+
+## HW config
+hw_model     = Tyan Thunder KKQS Pro (S4882)
+hw_cpu_name  = AMCC X-gene
+hw_cpu_char  =
+hw_cpu_mhz   = 3193.750
+hw_fpu       = Integrated
+hw_nchips	= 1
+hw_ncores	= 4
+hw_ncoresperchip= 1
+hw_nthreadspercore = 1
+hw_ncpuorder = 1 chip
+hw_pcache    = 32 KB I + 32 KB D on chip per chip
+hw_scache    = 3 MB I+D on chip per chip
+hw_tcache    = None
+hw_ocache    = None
+hw_memory	= 8 GB (1 x 8GB DDR333 CL2.5)
+hw_disk		= SATA
+hw_vendor	= Tyan
+
+## SW config
+sw_os        = SUSE SLES9 (for AMD64)
+sw_file      = ext3
+sw_state     = runlevel 3
+sw_compiler  = gcc , g++ & gfortran 4.9.2 (for AMD64)
+sw_avail = Dec-9999
+sw_other = None
+sw_auto_parallel = No
+sw_base_ptrsize = 64-bit
+sw_peak_ptrsize = Not Applicable
+
+
+#####################################################################
+# Optimization
+#####################################################################
+## Base is low opt
+default=base=default=default:
+COPTIMIZE     = -O3 -ffast-math -funroll-loops -fomit-frame-pointer -ftree-vectorize
+CXXOPTIMIZE  = -O3  -ffast-math -funroll-loops  -fomit-frame-pointer -ftree-vectorize
+FOPTIMIZE    = -O3 -ffast-math
+
+notes0100= C base flags: $[COPTIMIZE]
+notes0110= C++ base flags: $[CXXOPTIMIZE]
+notes0120= Fortran base flags: $[FOPTIMIZE]
+
+#####################################################################
+# 32/64 bit Portability Flags - all
+#####################################################################
+
+default=base=default=default:
+notes25= PORTABILITY=-DSPEC_CPU_LP64 is applied to all benchmarks in base.
+PORTABILITY = -DSPEC_CPU_LP64
+
+400.perlbench=base=default=default:
+COPTIMIZE     = -ffast-math -funroll-loops -fomit-frame-pointer -ftree-vectorize
+#####################################################################
+# Portability Flags - INT
+#####################################################################
+400.perlbench=default=default=default:
+notes35    = 400.perlbench: -DSPEC_CPU_LINUX_X64
+CPORTABILITY= -DSPEC_CPU_LINUX_X64 -include math.h
+
+462.libquantum=default=default=default:
+notes60= 462.libquantum: -DSPEC_CPU_LINUX
+CPORTABILITY= -DSPEC_CPU_LINUX
+
+416.gamess=default=default=default:
+FOPTIMIZE=-O1 -march=native 
+
+464.h264ref=default=default=default:
+CPORTABILITY = -fsigned-char                                      
+
+403.gcc=default=default=default:
+
+483.xalancbmk=default=default=default:
+CXXPORTABILITY= -DSPEC_CPU_LINUX -include cstdlib -include cstring
+
+#447.dealII=default:
+#CXXPORTABILITY = -include cstdlib -include cstring
+#CXXPORTABILITY= -DSPEC_CPU_LINUX -DXALAN_STRICT_ANSI_HEADERS
+
+482.sphinx3=base=default=default:
+CPORTABILITY = -fsigned-char                                      
+
+454.calculix=default=default=default:
+
+
+#####################################################################
+# Portability Flags - FP
+#####################################################################
+481.wrf=default=default=default:
+#wrf_data_header_size = 8
+CPORTABILITY = -DSPEC_CPU_CASE_FLAG -DSPEC_CPU_LINUX
+
+447.dealII=default:
+CXXPORTABILITY = -include cstring -include cstddef -include cstdlib
+#####################################################################
+
+
+
+__MD5__
+401.bzip2=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:15:33 2016
+optmd5=10a31df3a502f82b3454453771accc46
+baggage=
+compile_options=\
+@eNrFkbFOwzAQhvc8xcm7WUAMVVupcUJlcGuLJkNZqhA5EJTkIttl4Om5pKAUIbZK/PJwts++/74T\
+emNm8FKWwGkhYB9q7PwVAk92JhUHYXIKt0ka52sgcX0NvKoKH3hbhFeKj53DpuENYu9pi20deOWK\
+1vIe6y5YR4fBWcvfbRnQ1R8WTpoqHJS5vYFvzT0eXWmXkZiBEAtG7tgY6/hem2zBflhlETVAf9yp\
+1XpHd79ts0gPj00mN/IppZQLtDBWNfoxW8VSyWx/XnjshkVKbh9OaC9F7Q9gc3x+oyS/hEkTn4Gc\
+Sr4o/guI0YDOh8GdTe0TtV3BhQ==
+exemd5=61f0a2756d240bfd6c5a1908da3302fa
+
+403.gcc=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:17:59 2016
+optmd5=933944fbe7181aad944e28e58b6c9712
+baggage=
+compile_options=\
+@eNrFkcFugzAMhu88RZR7uGzaoWorQWBtNiDRCoftghgKGxNgFNId9vQzMNRW026VZuVgO5b9+zOX\
+sVqRt7IkDB8Q6G0N3eACYcFBhTznKkM3CUI/2xEmXEIIkzeEVVUxWNYW9h39Y2egaVgD0A8YQltb\
+Vpmi1ayHurPaYNIardmnLi2Y+kuT2U5D8kjd3ZLF1gMcTam3Dl8RzjcUBdLJl/6DVOmGXqilDu6A\
+Pe4jb3fAv9/Kpwo/TPg+X4qESx05dlSpiMVLiKkr7DUNUvIp9XwRifT5XM20InUikTzOyK+F8g+K\
+a3j9wKJhOw5q2iV94jYSjYIfuv/CAgXEXrrPI+GPN2laOmuS2XjjswN/A3h3zRU=
+exemd5=4eec94031fd1397ff9f0d8389ca9df4c
+
+429.mcf=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:18:04 2016
+optmd5=df046e799b0e7cb1b2a8345e939d9304
+baggage=
+compile_options=\
+@eNrFUU9PgzAUv/Mpmt7rReNh2ZZAwa0KtBklRi8NkqIYoKR0Hvz0PsC5qfG2xJceXl9f+vtHeSIW\
+6LksEYFjkOldbbrhwiASZiKiiooc2jSMgnyDoLv3U6kyGVIldlxyGPFLRKqqGBxpC/cC/b6zpmlI\
+Y0w/wNW0tSOVLVpNelN3TlsYOqs1edOlM7Z+12iuI6SKxfUVOtRyMHtb6rVHF4jSFQa6eOp5cMuF\
+XOFv3LEHiuCPm9jfZPD2W8e0EUQp3Sr6tfVDGPb4CCAkS9hjBAtnkDnhCr6TfsBiJh9OyU2KsRez\
+9G7O41zO/mHq0jy9wtKwHoGa9jA+2jgaHIefZv+LF0Ag8eVWxSwYE2paPHPi+Rj5Sd4fM43WZg==
+exemd5=77ebc0ffd08847c90e6c525c075343a7
+
+445.gobmk=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:18:49 2016
+optmd5=a77abe23550adabd9494f524a34a0ac4
+baggage=
+compile_options=\
+@eNrFUk1PhDAQvfMrmt67HjQeNrubQGGhCrRxwUQvBLEoBiiB4sFf7xTcD2M8mGxi0zav7WT63puh\
+PBJL9FIUiMBUSHW6Uu2wUIi4O+HRjIoUYOx6TuoDCOx7L6M83jI/CxBhC7Pm7aJqi3p8luZwwAgR\
+folIWeaDJk2uXwGPba/qmtRKdQMcVVNpUvZ5I0mnqlbLHi51LyV5l4VWffVh0phxpJSF4voK7cdq\
+UGNfyI1Fl4jSNQY5eMLcueEiWeNv2rAFiiHHNrT9Hbz91DlFOF5Mg+wQ9Efh2OLmf5GwiD16kOAM\
+Lky0BL9LbIeFLHk45T4Zgq2QxbdzOc9l/C+er9TTGwQNG/NR3eyvjy4b/0P3qxb/4gUQiOwkyELm\
+mArWDZ458dR0xEk7fAKCReeT
+exemd5=c7bd19020476c302dc936caba3c5b361
+
+456.hmmer=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:19:10 2016
+optmd5=519665dc4468a9eb82c603a3f5f89e2b
+baggage=
+compile_options=\
+@eNrFkT1PwzAQhvf8Csu7WUAMVVspcUIxOLVFnQGWKEQOBCW5yHEZ+PVcEqq2QmyVOHk4nz/e957j\
+KtUL8laWhOECAr2voRuugLB4pxOec51huo2TKNsQDKauCauqYvCsLfw75vvOQdOwBqAfcAtt7Vnl\
+itayHurOW4dF76xln7b04OovS+Y4KuRS396QQywH2LvSrgO+IJyvKLqjU66iB6XNip5ZpQE2gH/c\
+yXCzw7PftmmgxsfaiFS8JHjlAi1Mqlo9mTASUpjnU+GpGxpIsX2c0V6K2h/AlvD6gZeG9SjUtIfy\
+EdEIT8Y/IP+FBRpIQ3OfSxGNM2paOntS2TjOk1l+A6J7x2w=
+exemd5=44ed884714495756422a70034426ff32
+
+458.sjeng=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:19:20 2016
+optmd5=aa08f5c328575e02d24d867ab9abd483
+baggage=
+compile_options=\
+@eNrFkbFOwzAQhvc8xcm7WUAMVVupcUJlcGuLJkNZqhA5EJTkIttl4Om5pKAUIbZK/PJwts++/74T\
+emNm8FKWwGkhYB9q7PwVAk92JhUHYXIKt0ka52sgcX0NvKoKH3hbhFeKj53DpuENYu9pi20deOWK\
+1vIe6y5YR4fBWcvfbRnQ1R8WTpoqHJS5vYFvzT0eXWmXkZiBEAtG7tgY6/hem2zBflhlETVAf9yp\
+1XpHd79ts0gPj00mN/IppZQLtDBWNfoxW8VSyWx/XnjshkVKbh9OaC9F7Q9gc3x+oyS/hEkTn4Gc\
+Sr4o/guI0YDOh8GdTe0TtV3BhQ==
+exemd5=6a322767d0d8f669520cb127479577f8
+
+462.libquantum=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:19:26 2016
+optmd5=4f6a8449c3307ca8c8c48f4a23879221
+baggage=
+compile_options=\
+@eNrNUsFOwzAMvfcrotzDBbTDtE1q0zIK7RKxVIJdplKlUNTWVZpx4Otx2qJtQkgcdiCKFDux4/ee\
+zUUq5+S1KAjDDQQ6W0HbXwFh4VZGfM9lhuYmjIJsTXAxcU1YWea9ZU1u39A+tAbqmtUAXY8uNJVl\
+pckbzTqoWqsNXlqjNfvQhQVTfWoyrmOFfSJnN2d+vMmepjCy6OFgCr3y+JxwvqSIlg62CO6FVEt6\
+Bp16SAj/uE389RbfftKgnnDJUsVpvIsw5AKUhqpSPCo/iJNYPZ8WHthNsH6LcHyph8fD2I1LCf1H\
+jRfw8o5J/coVrptv5Y+qOr2TcNL+v8qHGFNf3aEbuM7XDR1hi8wNycmEfAGsWuRK
+exemd5=91de27e0265e6e3d69028e0f49533424
+
+464.h264ref=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:20:12 2016
+optmd5=31367180607a5c69e29cc7159d5eef6a
+baggage=
+compile_options=\
+@eNrVUrFugzAQ3fkKy7u7tOoQJZHA0NQtxFYDQ7sgSk1CBRyynQ79+h6QKok6RcrSk4fz+c7v3r3j\
+MlEzsi1LwvAAgd7V0NkbICzcqIjnXGXorsMoyFYEjclbwqqqsI61hduhv+8MNA1rAHqLV2hrxypT\
+tJr1UHdOGww6ozX70qUDU39rMtkRIY/V/R2m2Xrb6Q9W7gpDLrK5hb0p9dLjM8L5giIhOvoyeJIq\
+XdAzdtRDzgj7EPurDb79ZUo9ORSrVCTiLcKUK7AeUZV8Sf1AxCJ9PQUeB3Bo6yzj8pFQLxbr50nT\
+a8l1PaXm8P6J/9rl0FvT/oaP2gyqxeFBwX8sAtJI/PQxj0UwrFjT0omZzIZtPFnFH35c92I=
+exemd5=987abf05a15e3cecee5d310f3fd25f21
+
+471.omnetpp=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:21:02 2016
+optmd5=e2d631d2a40eff00d2613af4ba434983
+baggage=
+compile_options=\
+@eNrFUcFOwzAMvfcrrF6njAOIw7RNWrMyAl0TsVYaXKqupBDU1lWa7sDXk7aDDYHEZRKWEtmxY7/3\
+TPlaTOBlNAKSAUHA2iismjECWW6ETxMqYuuGS9+LV0DY2B4sK2kSVWVF+yxtXKhdcyGrvdIAQPil\
+vfI8bQwpU/Nq/bbSWBSkQKybLoelMiTXaSlJjaoyUttHo6Uke5kZ1Opddo2+5ieBuL6CwaYNtjqT\
+c4dOgG63M9dCdw8B9+64iGbuNyauY/nZJjfBYrWxuZ+s+grPD+lt8ln0B03X4cNAEbE1e/Ltj7Ow\
+7pEI/hAtPBaw6PEUbi+C6wQsvB/2dT6pf1caprh7s0XNHI521LXTPFge9P83OXoQPO6WfrLxD/FL\
+3Uk=
+exemd5=4eeb2f68e8ec0b46419f5c11cec73d48
+
+473.astar=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:21:08 2016
+optmd5=756d779cb8ae6c2296a4554a0f06025d
+baggage=
+compile_options=\
+@eNrFUcFugzAMvfMVVq5Vdtm0Q9VWgpB12SiJVpC6XRBDYWMCjCDdYV+/AJUK6o6V5kPk2E/2e89M\
+7tQSPhYLoBlQBGxMgXV3g0D9veIsYSq2aehzL95OakkgoijgCQ994YYAQOWtffI87QytUvNp82Pd\
+YlnSErHp+h5WhaF5m1aaNljURre2aFqt6bfODLbFj+4HTXao+zsYY9Xhsc30xmFLYIfDmljK5PSR\
+3pNU0ZrMFBDH6rJDHgJ3u7e9SzUDwuMhe0wuQHN5xJHjIhWJnXjjFnkVtQMDJV8i1xN24eucgRVP\
+nECEz+N9rmfx3w7DCt+/LKjbwDnOfvZeB/7J93+zYyAh4/7Yk0v/AnsQ1R8=
+exemd5=ac74e8caa74af7f13b8448ee8d99b05d
+
+483.xalancbmk=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:26:38 2016
+optmd5=af30b4f93f1cf8408245002fef83083e
+baggage=
+compile_options=\
+@eNrtVNFumzAUfc9XWLxWbqSt2kPVVnLAS90BtrCp2F4sSpyMCXBkk6rb19dASMiqSnuIJk0aEuie\
+ew/GnHuufRqxa7C5uACwAFADvW1L3dhLDWDAGfalz1IXxgFepEvgIsSYjKkU9wlGAXeJDIUoliSO\
+cCQjvpQhRQFOACSX7n5RplC2OEbzla5P0byst9UkZfOXCdq1ZTWP7CbU+UoZOydNpGptfv5OESZv\
+bKEHTqGb546QV3lTzMumqHYr5bbKEvogsyhkKOHdFg+JVJBwhEORj5Cj7MqfgA9jHNBoDB9RSAIk\
+aP+WW06mHMsYCfKIpUhQzH3aS3Ko7dXCnKMlHgU7VNkoLoD0o3us17ltYZ233128a4yuKlhpvbVd\
+TddlC9cmrxXc6rJplXHJ1igFn1XRalP+UgBMmilD9unqBJM4zQAcVSpsu6rKp5OEKZsN6K8bq3dO\
+9buZfw38LLv1nHO8PaCLB8rErXdiJG/m7OU+8zlES+5qb03VMxY49u+lW+TA+++zv+Yzb0aHBjJB\
+IvINO/nP4ru+s4wmAi1ISMTXaft7Gw7myLJ3OX9mTW/miF+GU+x8M3OukQE3+umHW9begeN1HJBu\
+eMJgP0j/eh/6f6FpdwhMToBXolv/Iw==
+exemd5=6dd26d2f924e80fa2faafa7961b94b72
+
+999.specrand=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:26:41 2016
+optmd5=863e1cd5cddf4cc9b460bc16f2384dca
+baggage=
+compile_options=\
+@eNrFkbFOwzAQhvc8xcm7WUAMVVupcUJlcGuLJkNZqhA5EJTkIttl4Om5pKAUIbZK/PJwts++/74T\
+emNm8FKWwGkhYB9q7PwVAk92JhUHYXIKt0ka52sgcX0NvKoKH3hbhFeKj53DpuENYu9pi20deOWK\
+1vIe6y5YR4fBWcvfbRnQ1R8WTpoqHJS5vYFvzT0eXWmXkZiBEAtG7tgY6/hem2zBflhlETVAf9yp\
+1XpHd79ts0gPj00mN/IppZQLtDBWNfoxW8VSyWx/XnjshkVKbh9OaC9F7Q9gc3x+oyS/hEkTn4Gc\
+Sr4o/guI0YDOh8GdTe0TtV3BhQ==
+exemd5=450fbda707e4716985124eee6e7659f9
+
+433.milc=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:26:58 2016
+optmd5=3d3a2c50ca87775c63d94a433022cce4
+baggage=
+compile_options=\
+@eNrFUk9rgzAUv/spQu7pZWOH0hY0WnVTE5o42C7iJG4ONaLpDvv0e7Er7Si7jMJCSF5eHsnvz6Ms\
+5Uv0WlWIwNRID6bR/bTQiPiCB7SgPIcw8wMvDxGJF3DYZnZxhYSNsizcuX4hU148BlSynYCsLxJX\
+RHMyibMHgRAi7AaRui4nQ7rSvEG870fdtqTVepjgqLvGkHosO0UG3fRGjZA0o1LkQ1VGj82nQodx\
+QlYk/O4WHcdq0vuxUhuHLhGlawys8Bwz755xucY/KGIHiMMb28QNBdxd0p0rvCCjUXEs+iN/7DAL\
+g8s4jZ8DeOcKYszoONtJ14uTWD6dU5h1wY79+2DutfT/RfqVfnmHomljP2q7Y/oktrUh8b8t+Rct\
+AEDqygj88KyRbYcPmFhuG+OsK74AkgrqpQ==
+exemd5=127d5c88b8fa393165c21b4d95e58068
+
+444.namd=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:27:29 2016
+optmd5=29fc84cfd63675172db571aa897ed39f
+baggage=
+compile_options=\
+@eNrFkcFOwzAMhu99CivXKVxAHKZt0pqWqZAtEWulwWUqVQpFbV0lGQeeHred2BAcJ+FD5MSO/fuz\
+UGs9hdfJBHgBHAE7X2HrrhB4tNWx2AudkbuJ4jBbARlX13SUZe48b3L/Rv6htVjXvEbsXB/DpvK8\
+tHljeIdV642lR2+N4R+m8GirT9MX+q6/l/r2BkabOTzYwiwCMQWx280ZSWPHiwrvlU7n7IdSFpB+\
+KnInl6stxX6rZoEav+s0WSfPMSVdZIahs1aP6TJMZJI+nTcfRmKBTDYPI93LgfubG8zw5Z2S3AJO\
+dqLUE5TRkea/4RhEqKxf4dn+vgCfXsKC
+exemd5=9f0f56fc5ca6bfcbe6fe871ea9546ecd
+
+447.dealII=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:31:27 2016
+optmd5=42394c4c0ea7460edf5ff91e6d3ce37f
+baggage=
+compile_options=\
+@eNrVUj1vwjAQ3fMrTlmRu7TqgAApXwW3AVskSGkXKyQOdZXEyDYd+uvrBBBEnVqx9Abr/O58vnv3\
+ArKkY9iNRoAKQBLk3gjZ6jsJKExoFLCAbqy7CiN/MwdAWLRFfSi5xXxCkpSFOPH8OGLpYh15YWLx\
+kuc1w5iVouGtttWm9/Yh6Y6qyrVBTW7erX9olaxrVEu5111MNsKgSuUNR3spWsOVBY3iHH3ywkgl\
+vjjAVVsspo8PgM4NFdoo0e4GQFnyagjUYgu9TbQ8qILPnGAMQZZNXcuBe7oQ/5nQdOoOKHEdS5T9\
+9in25omN/aSnz/CjVbBgtsg572+MuQ45tkJTvMRvkS10Ewb7HilZp56PY5y+Xg/SE3ocM8uGOb8m\
+2XVivHo5Kut227/V8mEitx+2rJ7BxS6r7mQQhydJ/Pc99LOQTSfnKy1/A0qLQM8=
+exemd5=66264ed2f1e2a44b9511ab92973dd32b
+
+450.soplex=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:32:10 2016
+optmd5=4721d4359542ec5e01508b8a65a754ea
+baggage=
+compile_options=\
+@eNrFkcFOwzAMhu99CivXKVxAHKZt0pqWqZAtEWulwWUqVQpFbV0lGQeeHred2BAcJ+FD5MSO/fuz\
+UGs9hdfJBHgBHAE7X2HrrhB4tNWx2AudkbuJ4jBbARlX13SUZe48b3L/Rv6htVjXvEbsXB/DpvK8\
+tHljeIdV642lR2+N4R+m8GirT9MX+q6/l/r2BkabOTzYwiwCMQWx280ZSWPHiwrvlU7n7IdSFpB+\
+KnInl6stxX6rZoEav+s0WSfPMSVdZIahs1aP6TJMZJI+nTcfRmKBTDYPI93LgfubG8zw5Z2S3AJO\
+dqLUE5TRkea/4RhEqKxf4dn+vgCfXsKC
+exemd5=b0b4d994700c3e41ce164e3e1c770213
+
+453.povray=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:33:06 2016
+optmd5=e305df4acef8011fa64f1b981529dd1e
+baggage=
+compile_options=\
+@eNrFkcFOwzAMhu99CivXKVxAHKZt0pqWqZAtEWulwWUqVQpFbV0lGQeeHred2BAcJ+FD5MSO/fuz\
+UGs9hdfJBHgBHAE7X2HrrhB4tNWx2AudkbuJ4jBbARlX13SUZe48b3L/Rv6htVjXvEbsXB/DpvK8\
+tHljeIdV642lR2+N4R+m8GirT9MX+q6/l/r2BkabOTzYwiwCMQWx280ZSWPHiwrvlU7n7IdSFpB+\
+KnInl6stxX6rZoEav+s0WSfPMSVdZIahs1aP6TJMZJI+nTcfRmKBTDYPI93LgfubG8zw5Z2S3AJO\
+dqLUE5TRkea/4RhEqKxf4dn+vgCfXsKC
+exemd5=8b5c1452adbc3fa4de31f130ab02185c
+
+470.lbm=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:33:20 2016
+optmd5=30df7cd61bca4c080f6bb6b8729d6771
+baggage=
+compile_options=\
+@eNrFkT1PwzAQhvf8Csu7WUAMVVspcUIxOLVFnQGWKEQOBCW5yHEZ+PVcEqq2QmyVOHk4nz/e957j\
+KtUL8laWhOECAr2voRuugLB4pxOec51huo2TKNsQDKauCauqYvCsLfw75vvOQdOwBqAfcAtt7Vnl\
+itayHurOW4dF76xln7b04OovS+Y4KuRS396QQywH2LvSrgO+IJyvKLqjU66iB6XNip5ZpQE2gH/c\
+yXCzw7PftmmgxsfaiFS8JHjlAi1Mqlo9mTASUpjnU+GpGxpIsX2c0V6K2h/AlvD6gZeG9SjUtIfy\
+EdEIT8Y/IP+FBRpIQ3OfSxGNM2paOntS2TjOk1l+A6J7x2w=
+exemd5=89601cbcb553eeee2c22e78f2030bd89
+
+482.sphinx3=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:33:39 2016
+optmd5=3b327dec31f354b9110ee9f66d2d3e3a
+baggage=
+compile_options=\
+@eNrVUrFuwjAQ3fMVlneztOqAACkxgbgNsVWSSu0ShdSAKydGjunQr+8lAUHUCYmlJw/nu7Pv7r1H\
++UqM0a4sEYFjkDk4ZepmZBCZr0VIcyoycJN5GGRLRNhoGI/8tzCnPFmwZR71aabV5uiURmCEPyCy\
+3RaNI1Xh9uAfa2u0JtqYQwNXUylHtraoJDkYVTtpIeislORbls5Y9SNRb5e2eSyeHqGsUbtafpJy\
+X1h0k00ac7SlnHl0jCidYtgedz4PnrlIp3gABfYAIGi7iP3lGnJ/YekqgjChUX4uugUn7PG2t0jZ\
+in2E8PgOoHUjCf6a+gGLWfp+PXeH32mrQcXtiGIvZslLr597sX0/oidm8wX/NrN2Nl2dwxdqW9Lj\
++UkA/5gEWGPlp1Ees6AVn65wvxnPWjFfKfkXY1sU4A==
+exemd5=6ef5c38b3e3253b1c40ac7e4b30a5250
+
+998.specrand=base=x86_64_linux=default:
+# Last updated Thu Jul 21 15:33:42 2016
+optmd5=17ba29635eaff5ac69d23fff2dc9e8fd
+baggage=
+compile_options=\
+@eNrFkbFOwzAQhvc8xcm7WUAMVVupcUJlcGuLJkNZqhA5EJTkIttl4Om5pKAUIbZK/PJwts++/74T\
+emNm8FKWwGkhYB9q7PwVAk92JhUHYXIKt0ka52sgcX0NvKoKH3hbhFeKj53DpuENYu9pi20deOWK\
+1vIe6y5YR4fBWcvfbRnQ1R8WTpoqHJS5vYFvzT0eXWmXkZiBEAtG7tgY6/hem2zBflhlETVAf9yp\
+1XpHd79ts0gPj00mN/IppZQLtDBWNfoxW8VSyWx/XnjshkVKbh9OaC9F7Q9gc3x+oyS/hEkTn4Gc\
+Sr4o/guI0YDOh8GdTe0TtV3BhQ==
+exemd5=450fbda707e4716985124eee6e7659f9
+
+400.perlbench=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:01:19 2016
+optmd5=dad1e17c1aa75fc64872398279b758f5
+baggage=
+compile_options=\
+@eNrVUj1vgzAQ3fkVlndnqjpESSRwaEIL2CIgpV0QpaahMhiB6dBf3zPQfKjKlC61PNz5nu/u3TvK\
+Aj5H73mOCFyFVKNLVXczhch6x12aUp6AGa5dJ9mAwd3ITymLXIQQKYqs06TK9AHsvm6VlEQq1XTg\
+qqrUpGizSpBGlbUWLTzqVgjyKXKt2vJLoPGcCqU+v7+78L0w2ad781jWuezfBDLVZofpK1p0qm9z\
+sbLoHFG6xEAEDzZzHhmPl/iCFbaAK+R98O3NDmK/GQ4Ixw3pNj2CjpSxxUxmHnuB9+JC6Eb+QzHO\
+oth2PN+Ln887GkYx9XsNcW042ILQ06jqX6h0g0AL9foBibqVaURWP7KdJDFi+etJuP8yXug5sOMt\
+QByzIbLCIw2WmI07W7dvopAGng==
+exemd5=669beebf2d88b7b0c9712fbe8a28b164
+
+410.bwaves=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:02:02 2016
+optmd5=0ee39fbff3ee03819127af9b822f0f38
+baggage=
+compile_options=\
+@eNqlkD0PgjAURXd+xUv3umgcCJBAAVMttFEYdCFIxI9EaqD+f0sNiolO3rEf5537CE+EDcdatqot\
+G8AVYAnyps6y6SYSdDCfAq7rslP4WqoTPIPDjYhIQUReMDGfwRCnk/e2OngWsSEmLhrIyBzwYMlF\
+5qKPMcjSBhoUM3+x0Xcvsh6ShlGQL5DF+88iowndRfrJp5IBCL7O/IAymm3HDGOHLEbT1ajml1Y/\
+CjlyfzlUqvPgnbd6X4qF45b/ihogz/sdjRb0AGRPdYg=
+exemd5=1046054ed8d6f5fdd887674bbfd365b9
+
+416.gamess=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:05:08 2016
+optmd5=95918890b5b9e09c43841b7fb9be351d
+baggage=
+compile_options=\
+@eNqtkFFrgzAUhd/9FRffFQZjsFILmmrNFk1o48P2Is7p5qgmqBtjv35Ju0qGK/RhebpcTu4534kY\
+W8Agq1JKAGe9YyHKEcvylOYxJSTcYh4bezWm6zDINqaWsJtrAFgO4r0vqxU4YprdWsrmq3p269tP\
+SzkFYYriPGIsIv5m59lnHG2tVcuZavI/KBjdcj/ABPOHX6d0INtCNFGal1r0Y1904JQ6mJBjI7rB\
+FSowOPQKnLboy1evK8bmo4KfN4c7vhOWhRYQIc8+HbcPCxrcUcZVEtPpEhSqPzOOE/wYKsks1QWw\
+BKf3BuzfbGewluLprSrHYaUl+3YqYWLQdGRt4v5DYnUz8XmcExzoXvatfbShma7Q6O8bY9u9kA==
+exemd5=6a8528cb9f3007127f6cb9beef28142f
+
+434.zeusmp=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:05:30 2016
+optmd5=a129c472c801fd5fbf72d0ea011bb514
+baggage=
+compile_options=\
+@eNqlkNFrwjAQxt/7Vxx5T18mwkQFm7aSLZow24ftpdTabA5mQpPB2F+/pKJGdCB4T8fx3Xff73Ih\
+RmB022gNADhdiYxURJSuXaZZUs6DWcXEcOBUY6O+u6adAlbHPpZab3/bTSwffyJn6eQ5m81XE3TF\
+E3mF4C/FLKGMFq+hqD+CIsIXTvMuVWe7ege48ceUtlu1M7ECn5U/AJayNhZ/1fYD9nWZdl+HnBEZ\
+QU4m6OCM+gFPnrgoXIzwDLqBg/tlUdAFfcuc5DzSDZiMLp8DzCtU/wCN1fqzbayZwqlO0T0US0PK\
+e4P2hrz0Pwoe9AdqUKCI
+exemd5=c7af562520165a6ee215dd32b4a4f924
+
+435.gromacs=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:06:22 2016
+optmd5=0ae2bbd89da422c4da4337c8f329d41c
+baggage=
+compile_options=\
+@eNqlklFPgzAQx9/3KRrey4vGxGVbAh2MKqONYyb6QrAWxQBtSmeMn96WBcWwJXP2qb38e/+7311I\
+6RS0kjMpAQBwuaEByhDdmmuyDPztahDLYnp1aVSzVuwU4wsAxffdLaQsP/mzW1x/TExKIw9jb7WZ\
+OwdyOlZByV3q+TjG6cNQ1Jk4E0TWRvNSCKVV3gDIrJmQuhRN6wpgayUXABZF3mpY5/oV7M+42v3p\
+65ygKQjR3OkzO12A+DeEpqaMoY1zQh/EfqYpXuPHwEh+l3R6m4yNOjw0CgCxa16Rdx9kiCQhXmXR\
+GAQsdo0SVQUrIWRrnqIuNSxUXnMoRdlorkxQK87hO2daKDO3P9BDlh5jHTh0Njij8IMERRnqVePW\
+OrzoKN6zGj1hJjFObgerd2DTjmCaiac349Mu7J+q7sM/YCyyeDlcvn/vzxSsvTTKYuxbhlXt7D3I\
+1g5lMJEvyQsd7g==
+exemd5=7036a2114d854a4b6efa53fd2299c686
+
+436.cactusADM=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:07:19 2016
+optmd5=64aec5e2810833d3c8ee75ff0f429992
+baggage=
+compile_options=\
+@eNqlks9PwjAUx+/8Fc3unQeNiQRIWDegOmgj46CXZZZWZ7a16Yox/vW2I4MZwCD29Pryfb8+700o\
+7YNacaYUAACGSxqhFNGVNRdhFKymHV8a09sbqxrUcqMZHwEod7YvlMq/+NoXd589m9LKJ/F4uhx6\
+R3J6TkHJYzIOcIyTp66oKeL1EJlbzauQ2uisApC5YlKZXFa1L4HrlVwDKERWG1hm5g1s32G329f2\
+2UN9MEFDr83sNQ4S3BOa2Da6Zbwz5iAumCZ4jp8jK/nZ0vljMnYw4bFVAIjzihWbNbeW71/tPiFC\
+JIwOmUCxqbQsClhIqWr7lWVuoNBZyaGSeWW4tk6jOYcfnBmp7Qr/ABI5kIw1DNHFDK0iiBZolqJW\
+9euUDXR0EvpFM5+xqRgvHjoHeeT+ThAbyJd3W6ceuZiibN17Ro5eHHZP8t9X1QfzcTJLYxw4nEXp\
+bWuQldtPZznfaGomYA==
+exemd5=5026052374f8196a2823227eac0ac392
+
+437.leslie3d=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:07:29 2016
+optmd5=07ea4676664b4121b32e8b865c384883
+baggage=
+compile_options=\
+@eNqlkD0PgjAURXd+xUv3umgcCJBAAVMttFEYdCFIxI9EaqD+f0sNiolO3rEf5537CE+EDcdatqot\
+G8AVYAnyps6y6SYSdDCfAq7rslP4WqoTPIPDjYhIQUReMDGfwRCnk/e2OngWsSEmLhrIyBzwYMlF\
+5qKPMcjSBhoUM3+x0Xcvsh6ShlGQL5DF+88iowndRfrJp5IBCL7O/IAymm3HDGOHLEbT1ajml1Y/\
+CjlyfzlUqvPgnbd6X4qF45b/ihogz/sdjRb0AGRPdYg=
+exemd5=26d344beacab99a41d8d404483828151
+
+454.calculix=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:09:06 2016
+optmd5=70a5dfce81cc41bd77b4fe643b02a682
+baggage=
+compile_options=\
+@eNq1klFPwyAUhd/7Kwjv7EVj4rItWVm3od0gtn3Ql6YiaE1bCGXG+OuFLdWabWZq5IleTjmH7945\
+Y0PQasG1BgCgWcIinGOWue16FoXZolfLY3Zx7lSjVm0MFxOA1Md+ILUu38TDQF6+Bu5KJ5/H00Uy\
+hgfuhF7B6E06DUlM0tu+aGsCA0xXTvMolbGmaADi3kxpW6qmHSiASMIojaPEh6ZnAElZtBbVhX0C\
+u7Ufe7e6wAEegjkew84Cbgs0vKIsdXn6fvC0B4XRGi/zTtQFhAH197KUrMhd5A6+pj0dBef7FA61\
+6xsySG4ao6oKVUrp1n2qurRImqIWSKuyscK4ojVCoBfBrTKuoz/AiT1Ozrck8T+RxEdJ/up1J+CP\
+yfq6N4kH5u0Im5G6f3Y+7cT/U9Vd+ZOG5xTP+iP451EZgtU0XeYxCT25qoY7D5r5TvTa8A5EayJO
+exemd5=f9c003c899edbc57776293f6c8d8283b
+
+459.GemsFDTD=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:09:35 2016
+optmd5=430dfc779b5a09aa937afc211674dfd8
+baggage=
+compile_options=\
+@eNqlkNFrwjAQxt/7Vxx5T18mwkQFm7aSLZow24ftpdTabA5mQpPB2F+/pKJGdCB4T8fx3Xff73Ih\
+RmB022gNADhdiYxURJSuXaZZUs6DWcXEcOBUY6O+u6adAlbHPpZab3/bTSwffyJn6eQ5m81XE3TF\
+E3mF4C/FLKGMFq+hqD+CIsIXTvMuVWe7ege48ceUtlu1M7ECn5U/AJayNhZ/1fYD9nWZdl+HnBEZ\
+QU4m6OCM+gFPnrgoXIzwDLqBg/tlUdAFfcuc5DzSDZiMLp8DzCtU/wCN1fqzbayZwqlO0T0US0PK\
+e4P2hrz0Pwoe9AdqUKCI
+exemd5=58c01ff1963602f7d644b9bd702cdffa
+
+465.tonto=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:12:25 2016
+optmd5=18aea6e062d26cbdcd4f1a4a7efa7eee
+baggage=
+compile_options=\
+@eNqtkFFPgzAUhd/3K254Ly8aE5dtCZQyq9A2UB70pUEEndnWBmo0/noLcw4zTZbofbptT+8934mF\
+mEJn6soYAPQKKCpyokRGVMAiJXguFeYsopJyln++kizjmUoDFixJSpgEtIH1ytZtufbNpj9ZvbV6\
+6KNcEKywKFzLIhIWy9GdSsTFOQDMOv3SVvUCkP7q/caY1Xv94DeXbxPnMSQMX6lYiDgJlvnc+3ev\
+Xr/FmdrPP3Y+KATPZBDShMrbsWhA8SaYp07z2OjWtuUWUNUjaWNXetv52qEC4meAmqbsLNqU9gl2\
+dZzJrvZpTPAUYjz39pO94YKH11xIZ2O85hQO3n8Wkqb0jjjJd0snYCaU3Ywwf6D6BWim75/rynYL\
+ONTBeg+VRGPKvxodBvKiz2gU0Afqe9gb
+exemd5=8f5869845cd158e860c4ffedd139bd91
+
+481.wrf=base=x86_64_linux=default:
+# Last updated Mon Jul 25 10:16:34 2016
+optmd5=9567e6b98f1e848cf491c1cde1663b10
+baggage=
+compile_options=\
+@eNrtU1tvmzAUfs+vsHg3TbpqaqpSidgm8wa2xUXL9mJlBDYmghHQbdqvn01JQ3ORok3b0/xizvF3\
+LnzfOZ4Qd6Cts7SuAYDfAdyCsuiyZl3a9RZAagOIKYspN/d7HuKIfiTOjcZi/GzeaiscPULsv7AY\
+iRH2TEwcUoJZHCbEgGhAY+mGy0gbJJCIh8SZGRgLBms6GIG7kpgGzmw6NS7E3UBEO4iJXol9gDef\
+yih2GXZ9zkgPZx5dykXiSZ8w53Y2v9bePicPXMoi6TnXM1OKS+YGxKdRLEWo/1v7IkGQRCIxz5gs\
+kuXIJ33x+mZsIzci0vPdlyDKkhUA4L5Vj02aPQConr/tvK6Ln9nGzuc/JlqKBWHojfSEMEkix/ov\
+yaEklqFJ07oj6FigHiF4GLsL6tP4wxjUKzakOIM4r6E1QTzQoZ9z1XTNugIwNVqquitU1drqSRxq\
+X1VZl27yq6JKy8dNpqWH/BWAeb5uO7hdd1/A0zkcpN3ZDccE3QEPOdauntU7+OItF7FueVz8QlaG\
+8RpAJ7u1JtwUEbEeBT0s1kHrF5A7kJSmx/yc2qZLOYP5Y9WosoSlUnWrTbUtOpg3620Ga1VUekW0\
+s2uyDH7L0k41eq/OEH3pxh6pgYwaadoLgf6FEOisEL/Fx19cDX29G63GiZk/M+736tNX3V/7APZn\
+z6dh2sfjHfjj8TQJeWKEG6n2C9Yg/GI=
+exemd5=a48bff6017b1c468f40c61340ff9a89c
+
