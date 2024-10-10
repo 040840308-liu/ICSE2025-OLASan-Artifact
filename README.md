@@ -2,20 +2,24 @@
 download OLASanRelease version (https://github.com/040840308-liu/OLASanRelease-Artifact) and save to a folder
 
 export LLVM_HOME=$OLASanRelease_folder/bin:$LLVM_HOME
+
 export PATH=$OLASanRelease_folder/bin:$PATH
 
 2. Compile and Run test on the Juliet
 
 export DATASET=Juliet
+
 export SPECNAME=Juliet
 
 cd $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/ in Juliet Folder
 
 #compile all programs
+
 make individuals;
 
 #run programs in batch
 #set dir="$Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/" in batch_run.py
+
 python3 batch_run.py
 
 #The detected results can be found in output.txt from Folder: $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/
@@ -28,7 +32,9 @@ python3 batch_run.py
 download ProfileRelease version llvm (https://github.com/040840308-liu/ProfileRelease-LLVM) and save to a folder
 
 #set environment variables to use profiling llvm
+
 export LLVM_HOME=$ProfileRelease-LLVM/build/bin:$LLVM_HOME
+
 export PATH=$ProfileRelease-LLVM/build/bin:$PATH
 
 mkdir /home/test/ProfileFolder/
@@ -46,6 +52,7 @@ We adopt instrumentation-infra to run SPEC with our llvm, we also uploaded our c
 First is to install xed@9fc12ab, instrumentation-infra@5bfbf68, mbuild@75cb46e, (or refer the install steps from https://github.com/vusec/floatzone).
 
 sudo apt install ninja-build cmake gcc-9 autoconf2.69 bison build-essential flex texinfo libtool zlib1g-dev
+
 pip3 install psutil terminaltables
 
 export DATASET=SPEC
@@ -53,11 +60,13 @@ export DATASET=SPEC
 1). run invidiual spec2006 or spec2017 benchmark with following command:
 
 python3 run-new.py run spec2006 default_O2 asan_O2 hwasan_O2--build --parallel=proc --parallelmax=1 --benchmarks 453.povray
+
 python3 run-new.py run spec2017 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1 --benchmarks 500.perlbench_r
 
 2). run all spec2006 or spec2017 benchmark with following command:
 
 python3 run-new.py run spec2006 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1
+
 python3 run-new.py run spec2017 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1
 
 Note here, default_O2 refers to run SPEC with origin LLVM, asan_O2 refers to run SPEC with AddressSanitizer, hwasan_O2 refers to run SPEC with our enable HWAddressSanitizer on x86_64.
@@ -76,8 +85,11 @@ Take Libtiff (CVE-2016-10271) as an example, we could easily download its test i
 1). First is Profile phrase
 
 #set environment variables
+
 export DATASET=CVE
+
 export SPECNAME=CVE
+
 export PROFILING=YES
 
 run ./build-profile.sh in CVE-2016-10271 folder to build profiled-version libtiff
@@ -103,8 +115,11 @@ save the final results with name libtiff10271 to folder /home/test/ProfileResult
 2). Second is sanitization phrase
 
 #set environment variables
+
 export PROFILING=No
+
 export PROFILERESULTS=/home/test/ProfileResults/
+
 export SPECNAME=libtiff10271
 
 run ./build.sh in CVE-2016-10271 folder to build sanitized-version libtiff
