@@ -26,6 +26,7 @@ To use OLASan, please follow the instructions below to set up your environment a
    export PATH=$OLASanRelease_folder/bin:$PATH
 
 2. **Compile and Run Tests on the Juliet Dataset**
+
    Set up the Juliet dataset environment:
 
    ```bash
@@ -33,16 +34,19 @@ To use OLASan, please follow the instructions below to set up your environment a
    export SPECNAME=Juliet
 
    cd $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/ in Juliet Folder
+   
    #compile all programs
+   
    make individuals;
 
-   **#run programs in batch**
+   #run programs in batch
+   
    #set dir="$Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/" in batch_run.py
 
-  ```bash
-  python3 batch_run.py
+   python3 batch_run.py
 
-  **#The detected results can be found in output.txt from Folder: $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/**
+  #The detected results can be found in output.txt from Folder: 
+  $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/
 
   #Note:CWE121_Stack_Based_Buffer_Overflow/s09/ include intra-object overflow examples, which all ASan, ASan--, HWASan and GiantSan fails to detect.
 
