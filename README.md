@@ -25,9 +25,10 @@ To use OLASan, please follow the instructions below to set up your environment a
    export LLVM_HOME=$OLASanRelease_folder/bin:$LLVM_HOME
    export PATH=$OLASanRelease_folder/bin:$PATH
 
-2. **Running Juliet Tests**
+2. ##Running Juliet Tests
 
-   #Compile and Run Tests on the Juliet Dataset
+   **Compile and Run Tests on the Juliet Dataset**
+   
    Set up the Juliet dataset environment:
 
    ```bash
@@ -52,7 +53,7 @@ To use OLASan, please follow the instructions below to set up your environment a
    
    #Note:CWE121_Stack_Based_Buffer_Overflow/s09/ include intra-object overflow examples, which all ASan, ASan--, HWASan and GiantSan fails to detect.
 
-3. **Dynamic Profiling**
+4. **Dynamic Profiling**
 
    Download ProfileRelease version llvm [here](https://github.com/040840308-liu/ProfileRelease-LLVM) and save to a folder
 
@@ -69,7 +70,7 @@ To use OLASan, please follow the instructions below to set up your environment a
    
    More details about how to do profiling, please see below CVE real case analysis.
 
-4. **Run SPEC**
+5. **Run SPEC**
    
    #We adopt instrumentation-infra to run SPEC with our llvm, we also uploaded our config files.
 
