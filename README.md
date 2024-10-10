@@ -24,3 +24,10 @@ To use OLASan, please follow the instructions below to set up your environment a
    ```bash
    export LLVM_HOME=$OLASanRelease_folder/bin:$LLVM_HOME
    export PATH=$OLASanRelease_folder/bin:$PATH
+
+2. **Compile and Run Tests on the Juliet Dataset
+   Set up the Juliet dataset environment:
+   ```bash
+   export DATASET=Juliet
+   export SPECNAME=Juliet
+
