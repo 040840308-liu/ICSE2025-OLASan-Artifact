@@ -45,10 +45,9 @@ To use OLASan, please follow the instructions below to set up your environment a
 
    python3 batch_run.py
 
-  #The detected results can be found in output.txt from Folder: 
-  $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/
-
-  #Note:CWE121_Stack_Based_Buffer_Overflow/s09/ include intra-object overflow examples, which all ASan, ASan--, HWASan and GiantSan fails to detect.
+   #The detected results can be found in output.txt from Folder:
+   $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/
+   #Note:CWE121_Stack_Based_Buffer_Overflow/s09/ include intra-object overflow examples, which all ASan, ASan--, HWASan and GiantSan fails to detect.
 
 
 3. Dynamic Profiling
