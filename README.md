@@ -146,6 +146,8 @@ To use OLASan, please follow the instructions below to set up your environment a
 
    run ./build.sh in CVE-2016-10271 folder to build sanitized-version libtiff
 
-   #then run libtiff with poc: libtiff/tools//tiffcrop -i ./00100-libtiff-heapoverflow-_TIFFFax3fillruns /tmp/foo
+   #then run libtiff with poc
+
+   libtiff/tools//tiffcrop -i ./00100-libtiff-heapoverflow-_TIFFFax3fillruns /tmp/foo
 
    #Heap overflow could be detected, the details are also output.
