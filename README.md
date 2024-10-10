@@ -52,21 +52,21 @@ To use OLASan, please follow the instructions below to set up your environment a
    #Note:CWE121_Stack_Based_Buffer_Overflow/s09/ include intra-object overflow examples, which all ASan, ASan--, HWASan and GiantSan fails to detect.
 
 3. **Dynamic Profiling**
-   download ProfileRelease version llvm [here](https://github.com/040840308-liu/ProfileRelease-LLVM) and save to a folder
 
-#set environment variables to use profiling llvm
+   Download ProfileRelease version llvm [here](https://github.com/040840308-liu/ProfileRelease-LLVM) and save to a folder
 
-export LLVM_HOME=$ProfileRelease-LLVM/build/bin:$LLVM_HOME
+   #set environment variables to use profiling llvm
 
-export PATH=$ProfileRelease-LLVM/build/bin:$PATH
+   ```bash
+   export LLVM_HOME=$ProfileRelease-LLVM/build/bin:$LLVM_HOME
+   export PATH=$ProfileRelease-LLVM/build/bin:$PATH
+   mkdir /home/test/ProfileFolder/
 
-mkdir /home/test/ProfileFolder/
-
-Run programs with unittests (workload)
-
-And the profiling results will output to folder /home/test/ProfileFolder/.
-
-More details about how to do profiling, please see below CVE real case analysis.
+   #Run programs with unittests (workload)
+   
+   And the profiling results will output to folder /home/test/ProfileFolder/.
+   
+   More details about how to do profiling, please see below CVE real case analysis.
 
 4. Run SPEC
 
