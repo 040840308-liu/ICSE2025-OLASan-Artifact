@@ -33,20 +33,18 @@ To use OLASan, please follow the instructions below to set up your environment a
    export SPECNAME=Juliet
 
    cd $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/ in Juliet Folder
-
    #compile all programs
-
-   ```bash
    make individuals;
 
-#run programs in batch
-#set dir="$Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/" in batch_run.py
+   **#run programs in batch**
+   #set dir="$Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/" in batch_run.py
 
-python3 batch_run.py
+  ```bash
+  python3 batch_run.py
 
-#The detected results can be found in output.txt from Folder: $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/
+  **#The detected results can be found in output.txt from Folder: $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/**
 
-#Note:CWE121_Stack_Based_Buffer_Overflow/s09/ include intra-object overflow examples, which all ASan, ASan--, HWASan and GiantSan fails to detect.
+  #Note:CWE121_Stack_Based_Buffer_Overflow/s09/ include intra-object overflow examples, which all ASan, ASan--, HWASan and GiantSan fails to detect.
 
 
 3. Dynamic Profiling
@@ -157,5 +155,3 @@ run ./build.sh in CVE-2016-10271 folder to build sanitized-version libtiff
 #then run libtiff with poc: libtiff/tools//tiffcrop -i ./00100-libtiff-heapoverflow-_TIFFFax3fillruns /tmp/foo
 
 Heap overflow could be detected, the details are also output.
-
-
