@@ -70,9 +70,9 @@ To use OLASan, please follow the instructions below to set up your environment a
 
 5. **Run SPEC**
    
-   #We adopt instrumentation-infra to run SPEC with our llvm, we also uploaded our config files.
+   We adopt instrumentation-infra to run SPEC with our llvm, we also uploaded our config files.
 
-   #First is to install xed@9fc12ab, instrumentation-infra@5bfbf68, mbuild@75cb46e, (or refer the install steps from https://github.com/vusec/floatzone).
+   First is to install xed@9fc12ab, instrumentation-infra@5bfbf68, mbuild@75cb46e, (or refer the install steps from https://github.com/vusec/floatzone).
 
    ```bash
    sudo apt install ninja-build cmake gcc-9 autoconf2.69 bison build-essential flex texinfo libtool zlib1g-dev
@@ -103,7 +103,7 @@ To use OLASan, please follow the instructions below to set up your environment a
 
 6. **Run OLASan on real CVEs**
    
-   #Take Libtiff (CVE-2016-10271) as an example, we could easily download its test inputs from https://download.osgeo.org/libtiff/pics-3.8.0.tar.gz., where the latest archive of test images used by Libtiff library.
+   Take Libtiff (CVE-2016-10271) as an example, we could easily download its test inputs from https://download.osgeo.org/libtiff/pics-3.8.0.tar.gz., where the latest archive of test images used by Libtiff library.
 
    #1). First is Profile phrase
 
