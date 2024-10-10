@@ -6,7 +6,7 @@ OLASan (Object-Level Address Sanitizer) is a memory sanitizer that enhances memo
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Setup Instructions](#setup-instructions)
-- [Running Tests](#running-tests)
+- [Running Juliet Tests](#running-juliet-tests)
 - [Dynamic Profiling](#dynamic-profiling)
 - [Running SPEC Benchmarks](#running-spec-benchmarks)
 - [Running OLASan on Real CVEs](#running-olasan-on-real-cves)
@@ -46,13 +46,13 @@ To use OLASan, please follow the instructions below to set up your environment a
    python3 batch_run.py
 
    #The detected results can be found in output.txt from Folder:
+   
    $Path/OLASan-Artifact/Juliet/testcases/CWE121_Stack_Based_Buffer_Overflow/s09/
+   
    #Note:CWE121_Stack_Based_Buffer_Overflow/s09/ include intra-object overflow examples, which all ASan, ASan--, HWASan and GiantSan fails to detect.
 
-
-3. Dynamic Profiling
-
-download ProfileRelease version llvm (https://github.com/040840308-liu/ProfileRelease-LLVM) and save to a folder
+3. **Dynamic Profiling**
+   download ProfileRelease version llvm [here](https://github.com/040840308-liu/ProfileRelease-LLVM) and save to a folder
 
 #set environment variables to use profiling llvm
 
