@@ -68,93 +68,82 @@ To use OLASan, please follow the instructions below to set up your environment a
    
    More details about how to do profiling, please see below CVE real case analysis.
 
-4. Run SPEC
+4. **Run SPEC**
+   #We adopt instrumentation-infra to run SPEC with our llvm, we also uploaded our config files.
 
-We adopt instrumentation-infra to run SPEC with our llvm, we also uploaded our config files.
+   #First is to install xed@9fc12ab, instrumentation-infra@5bfbf68, mbuild@75cb46e, (or refer the install steps from https://github.com/vusec/floatzone).
 
-First is to install xed@9fc12ab, instrumentation-infra@5bfbf68, mbuild@75cb46e, (or refer the install steps from https://github.com/vusec/floatzone).
+   ```bash
+   sudo apt install ninja-build cmake gcc-9 autoconf2.69 bison build-essential flex texinfo libtool zlib1g-dev
 
-sudo apt install ninja-build cmake gcc-9 autoconf2.69 bison build-essential flex texinfo libtool zlib1g-dev
+   pip3 install psutil terminaltables
 
-pip3 install psutil terminaltables
+   export DATASET=SPEC
 
-export DATASET=SPEC
+   #1). run invidiual spec2006 or spec2017 benchmark with following command:
 
-1). run invidiual spec2006 or spec2017 benchmark with following command:
+   python3 run-new.py run spec2006 default_O2 asan_O2 hwasan_O2--build --parallel=proc --parallelmax=1 --benchmarks 453.povray
 
-python3 run-new.py run spec2006 default_O2 asan_O2 hwasan_O2--build --parallel=proc --parallelmax=1 --benchmarks 453.povray
+   python3 run-new.py run spec2017 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1 --benchmarks 500.perlbench_r
 
-python3 run-new.py run spec2017 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1 --benchmarks 500.perlbench_r
+   #2). run all spec2006 or spec2017 benchmark with following command:
 
-2). run all spec2006 or spec2017 benchmark with following command:
+   python3 run-new.py run spec2006 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1
 
-python3 run-new.py run spec2006 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1
+   python3 run-new.py run spec2017 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1
 
-python3 run-new.py run spec2017 default_O2 asan_O2 hwasan_O2 --build --parallel=proc --parallelmax=1
+   #Note here, default_O2 refers to run SPEC with origin LLVM, asan_O2 refers to run SPEC with AddressSanitizer, hwasan_O2 refers to run SPEC with our enable HWAddressSanitizer on x86_64.
 
-Note here, default_O2 refers to run SPEC with origin LLVM, asan_O2 refers to run SPEC with AddressSanitizer, hwasan_O2 refers to run SPEC with our enable HWAddressSanitizer on x86_64.
+   #To compute the respective time and memory overhead do: (substitute run.2023-06-20.15-37-32/ with your result folder)
 
-To compute the respective time and memory overhead do: (substitute run.2023-06-20.15-37-32/ with your result folder)
+   python3 run-new.py report spec2006 results/run.2023-06-20.15-37-32/ --aggregate geomean --field runtime:median maxrss:median or
 
-python3 run-new.py report spec2006 results/run.2023-06-20.15-37-32/ --aggregate geomean --field runtime:median maxrss:median or
+   python3 run-new.py report spec2017 results/run.2023-06-20.15-37-32/ --aggregate geomean --field runtime:median maxrss:median or
 
-python3 run-new.py report spec2017 results/run.2023-06-20.15-37-32/ --aggregate geomean --field runtime:median maxrss:median or
+5. **Run OLASan on real CVEs**
+   #Take Libtiff (CVE-2016-10271) as an example, we could easily download its test inputs from https://download.osgeo.org/libtiff/pics-3.8.0.tar.gz., where the latest archive of test images used by Libtiff library.
 
+   #1). First is Profile phrase
 
-5. Run OLASan on real CVEs
+   #set environment variables
 
-Take Libtiff (CVE-2016-10271) as an example, we could easily download its test inputs from https://download.osgeo.org/libtiff/pics-3.8.0.tar.gz., where the latest archive of test images used by Libtiff library. 
+   ```bash
+   export DATASET=CVE
+   export SPECNAME=CVE
+   export PROFILING=YES
 
-1). First is Profile phrase
+   run ./build-profile.sh in CVE-2016-10271 folder to build profiled-version libtiff
 
-#set environment variables
+   #then run libtiff with several test .tif inputs
 
-export DATASET=CVE
+   libtiff/tools//tiffcrop -i ./libtiffpic/caspian.tif /tmp/foo
+   libtiff/tools//tiffcrop -i ./libtiffpic/cramps.tif /tmp/foo
+   libtiff/tools//tiffcrop -i ./libtiffpic/dscf0013.tif /tmp/foo
+   libtiff/tools//tiffcrop -i ./libtiffpic/fax2d.tif /tmp/foo
+   libtiff/tools//tiffcrop -i ./libtiffpic/g3test.tif /tmp/foo
+   libtiff/tools//tiffcrop -i ./libtiffpic/jello.tif /tmp/foo
+   libtiff/tools//tiffcrop -i ./libtiffpic/oxford.tif /tmp/foo
+   libtiff/tools//tiffcrop -i ./libtiffpic/pc260001.tif /tmp/foo
+   libtiff/tools//tiffcrop -i ./libtiffpic/quad-lzw.tif /tmp/foo
 
-export SPECNAME=CVE
+   #The collected profiling logs have been uploaded
 
-export PROFILING=YES
+   run python scripts pattern_mine to analyze these profiling logs and output the final profiling results.
 
-run ./build-profile.sh in CVE-2016-10271 folder to build profiled-version libtiff
+   #save the final results with name libtiff10271 to folder /home/test/ProfileResults/
 
-#then run libtiff with several test .tif inputs
+   #2). Second is sanitization phrase
 
-libtiff/tools//tiffcrop -i ./libtiffpic/caspian.tif /tmp/foo
+   #set environment variables
 
-libtiff/tools//tiffcrop -i ./libtiffpic/cramps.tif /tmp/foo
+   export PROFILING=No
 
-libtiff/tools//tiffcrop -i ./libtiffpic/dscf0013.tif /tmp/foo
+   export PROFILERESULTS=/home/test/ProfileResults/
 
-libtiff/tools//tiffcrop -i ./libtiffpic/fax2d.tif /tmp/foo
+   export SPECNAME=libtiff10271
 
-libtiff/tools//tiffcrop -i ./libtiffpic/g3test.tif /tmp/foo
+   run ./build.sh in CVE-2016-10271 folder to build sanitized-version libtiff
 
-libtiff/tools//tiffcrop -i ./libtiffpic/jello.tif /tmp/foo
+   #then run libtiff with poc: libtiff/tools//tiffcrop -i ./00100-libtiff-heapoverflow-_TIFFFax3fillruns /tmp/foo
 
-libtiff/tools//tiffcrop -i ./libtiffpic/oxford.tif /tmp/foo
-
-libtiff/tools//tiffcrop -i ./libtiffpic/pc260001.tif /tmp/foo
-
-libtiff/tools//tiffcrop -i ./libtiffpic/quad-lzw.tif /tmp/foo
-
-The collected profiling logs have been uploaded
-
-run python scripts pattern_mine to analyze these profiling logs and output the final profiling results.
-
-save the final results with name libtiff10271 to folder /home/test/ProfileResults/
-
-2). Second is sanitization phrase
-
-#set environment variables
-
-export PROFILING=No
-
-export PROFILERESULTS=/home/test/ProfileResults/
-
-export SPECNAME=libtiff10271
-
-run ./build.sh in CVE-2016-10271 folder to build sanitized-version libtiff
-
-#then run libtiff with poc: libtiff/tools//tiffcrop -i ./00100-libtiff-heapoverflow-_TIFFFax3fillruns /tmp/foo
-
-Heap overflow could be detected, the details are also output.
+   #Heap overflow could be detected, the details are also output.
